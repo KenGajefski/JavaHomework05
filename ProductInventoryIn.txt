@@ -1,0 +1,10 @@
+80     Daypack                     110.00        50
+81     Duffel Bag                   35.00        60
+82     Hammock                      70.00        70
+83     Cot                         155.00        80
+84     Tent                        430.00        90
+85     Stove                       100.00        40
+86     Cooler                      350.00        30
+87     Sleeping Bag                320.00        20
+88     Blanket                     140.00        10
+89     Camp Chair                  120.00       100

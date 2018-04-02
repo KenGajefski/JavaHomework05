@@ -1,7 +1,7 @@
-public class CampingCritters {
+public class HW5 {
 
     public static void main(String[] args){
-    // TODO
+
 
     }
 
