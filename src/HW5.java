@@ -38,8 +38,14 @@ public class HW5{
         input = keyboard.nextInt();
         while (!(input == 4)){
             // Any other option not on the menu
-            System.out.println("Placeholder.");
-            System.out.println("Placeholder.");
+            if (input > 4 || input < 0) {
+                System.out.println("That is not a valid menu option.");
+                input = keyboard.nextInt();
+            }
+            else {
+                System.out.println("Valid choice.");
+                input = keyboard.nextInt();
+            }
         }
         // End of menu
     }
