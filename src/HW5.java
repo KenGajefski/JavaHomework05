@@ -34,13 +34,13 @@ public class HW5{
 
 
         // Menu
-        /*
-        System.out.println("Make your selection");
+        System.out.println("Make your selection.");
         input = keyboard.nextInt();
         while (!(input == 4)){
             // Any other option not on the menu
+            System.out.println("Placeholder.");
+            System.out.println("Placeholder.");
         }
-        */
         // End of menu
     }
 
