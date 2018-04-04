@@ -13,14 +13,28 @@ public class HW5{
         // Variables
         Scanner fileIn = null;
         Scanner keyboard = new Scanner(System.in);
+        Product[] inv = new Product[11];
+        String tempLine;
         int input;
-
+        int i = 0;
 
         // Attempt to open input file
         try
         {
             // Assign external file to file handle
             fileIn = new Scanner(new FileInputStream(FILE_NAME));
+            tempLine = fileIn.nextLine();
+
+            while (fileIn.hasNext()){
+                System.out.println(tempLine);
+                inv[i] = new Product();
+                inv[i].setCode(Integer.parseInt(tempLine.substring(0,6).trim()));
+                inv[i].setName(tempLine.substring(7,31).trim());
+                inv[i].setCost(Double.parseDouble(tempLine.substring(31,41).trim()));
+                inv[i].setCount(Integer.parseInt(tempLine.substring(42,51).trim()));
+                i++;
+                tempLine = fileIn.nextLine();
+            }
         }
         // Handle file error
         catch (FileNotFoundException e)
@@ -32,11 +46,20 @@ public class HW5{
             System.out.println("Error message:" + e.getMessage());
         }
 
+        System.out.println(inv[6].getCode() + inv[6].getName() + inv[6].getCost() + inv[6].getCount());
 
         // Menu
-        System.out.println("Make your selection.");
+        System.out.print("=============================\n" +
+                         "=== Camping Critters Menu ===\n" +
+                         "=== 1. Sell Product       ===\n" +
+                         "=== 2. Order Product      ===\n" +
+                         "=== 3. List Inventory     ===\n" +
+                         "=== 4. Exit               ===\n" +
+                         "=============================");
+        System.out.println();
+        System.out.println("Make you menu selection.");
         input = keyboard.nextInt();
-        while (!(input == 4)){
+        do{
             // Any other option not on the menu
             if (input > 4 || input < 0) {
                 System.out.println("That is not a valid menu option.");
@@ -46,7 +69,8 @@ public class HW5{
                 System.out.println("Valid choice.");
                 input = keyboard.nextInt();
             }
-        }
+        } while (!(input == 4));
+        System.out.println("Now exiting the program.");
         // End of menu
     }
 

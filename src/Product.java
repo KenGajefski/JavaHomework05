@@ -38,6 +38,22 @@ public class Product {
         return inventoryCount;
     }
 
+    public double getCost() {
+        return cost;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public String getName() {
+        return name;
+    }
+
     public static void setProductCount(int productCount) {
         Product.productCount = productCount;
     }
@@ -48,6 +64,22 @@ public class Product {
 
     public static void setInventoryCount(int inventoryCount) {
         Product.inventoryCount = inventoryCount;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public boolean equals(Product prod) {
