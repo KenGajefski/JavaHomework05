@@ -4,25 +4,28 @@ import java.util.Scanner;
 
 public class HW5{
 
-    // Constants and Globals
+    // Globals, constants, and format specifiers
     private static final String FILE_NAME = "ProductInventoryIn.txt";
+    private static final String COL_SALE_LABEL = "%-10s";
+    private static final String COL_SALE_AMOUNT = "%-12d";
+    private static final String COL_SALE_REV = "$%,-12.2f";
 
     public static void sellProduct(int userCode, int userAmount, Product[] inv){
-        /* TODO
-        *  Change inventoryCount, inventoryValue, and count for product sold
-        *  Print product sold message that includes: code, amount, revenue
-        * */
 
         double revenue;
+        int amount = inv[userCode].getCount();
 
         revenue = inv[userCode].getCost() * userAmount;
 
-        System.out.println(Product.getInventoryValue());
-
+        // Changing values of Product
         Product.setInventoryCount(-userAmount);
         Product.setInventoryValue(-revenue);
+        inv[userCode].setCount(amount - userAmount);
 
-        System.out.println(Product.getInventoryValue());
+        // Printing revenue and changes
+        System.out.printf(COL_SALE_LABEL + COL_SALE_AMOUNT + "\n", "Code:", userCode);
+        System.out.printf(COL_SALE_LABEL + COL_SALE_AMOUNT + "\n", "Amount:", userAmount);
+        System.out.printf(COL_SALE_LABEL + COL_SALE_REV + "\n", "Revenue:", revenue);
     }
 
     public static void main(String[] args){
@@ -111,6 +114,7 @@ public class HW5{
                     }
                     else{
                         maxInv = inv[userCode-80].getCount();
+                        System.out.println("Amount of item: " + maxInv);
                         System.out.println("Enter an amount to sell");
                         input = keyboard.next();
                         userAmount = Integer.parseInt(input);
