@@ -6,9 +6,9 @@ public class HW5{
 
     // Globals, constants, and format specifiers
     private static final String FILE_NAME = "ProductInventoryIn.txt";
-    private static final String COL_SALE_LABEL = "%-10s";
-    private static final String COL_SALE_AMOUNT = "%-12d";
-    private static final String COL_SALE_REV = "$%,-12.2f";
+    private static final String COL_LABEL = "%-14s";
+    private static final String COL_AMOUNT = "%-14d";
+    private static final String COL_VALUE = "%,-14.2f";
 
     public static void sellProduct(int userCode, int userAmount, Product[] inv){
 
@@ -23,9 +23,9 @@ public class HW5{
         inv[userCode].setCount(amount - userAmount);
 
         // Printing revenue and changes
-        System.out.printf(COL_SALE_LABEL + COL_SALE_AMOUNT + "\n", "Code:", userCode);
-        System.out.printf(COL_SALE_LABEL + COL_SALE_AMOUNT + "\n", "Amount:", userAmount);
-        System.out.printf(COL_SALE_LABEL + COL_SALE_REV + "\n", "Revenue:", revenue);
+        System.out.printf(COL_LABEL + COL_AMOUNT + "\n", "Code:", userCode);
+        System.out.printf(COL_LABEL + COL_AMOUNT + "\n", "Amount:", userAmount);
+        System.out.printf(COL_LABEL + COL_VALUE + "\n", "Revenue:", revenue);
     }
 
     public static void orderProduct(int userCode, int userAmount, Product[] inv){
@@ -39,10 +39,22 @@ public class HW5{
         inv[userCode].setCount(amount + userAmount);
 
         // Printing cost and changes
-        System.out.printf(COL_SALE_LABEL + COL_SALE_AMOUNT + "\n", "Code:", userCode);
-        System.out.printf(COL_SALE_LABEL + COL_SALE_AMOUNT + "\n", "Amount:", userAmount);
-        System.out.printf(COL_SALE_LABEL + COL_SALE_REV + "\n", "Cost:", value);
+        System.out.printf(COL_LABEL + COL_AMOUNT + "\n", "Code:", userCode);
+        System.out.printf(COL_LABEL + COL_AMOUNT + "\n", "Amount:", userAmount);
+        System.out.printf(COL_LABEL + COL_VALUE + "\n", "Cost:", value);
 
+    }
+    
+    public static void listInventory(Product[] inv){
+
+        System.out.printf(COL_LABEL + COL_LABEL + COL_LABEL + COL_LABEL + "\n",
+                "Code", "Name", "Cost", "Count");
+        for (int i = 0; i < 10; i++){
+            System.out.printf(COL_AMOUNT + COL_LABEL + COL_VALUE + COL_AMOUNT + "\n",
+                    inv[i].getCode(), inv[i].getName(), inv[i].getCost(), inv[i].getCount());
+        }
+
+        
     }
 
     public static void main(String[] args){
@@ -162,7 +174,8 @@ public class HW5{
                     }
                     break;
                 case 3:
-
+                    listInventory(inv);
+                    break;
             }
             // End of switch statement
 
