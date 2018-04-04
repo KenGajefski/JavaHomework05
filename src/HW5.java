@@ -1,15 +1,23 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class HW5{
 
     // Globals, constants, and format specifiers
-    private static final String FILE_NAME = "ProductInventoryIn.txt";
+    private static final String FILE_IN = "ProductInventoryIn.txt";
+    private static final String FILE_OUT = "ProductInventoryOut.txt";
     private static final String COL_LABEL = "%-14s";
     private static final String COL_AMOUNT = "%-14d";
     private static final String COL_VALUE = "%,-14.2f";
+    private static final String CODE_OUT = "%-7d";
+    private static final String NAME_OUT = "%-23s";
+    private static final String COST_OUT = "%11.2f";
+    private static final String AMOUNT_OUT = "%10d";
 
+    // Sell Product
     public static void sellProduct(int userCode, int userAmount, Product[] inv){
 
         double revenue;
@@ -28,6 +36,7 @@ public class HW5{
         System.out.printf(COL_LABEL + COL_VALUE + "\n", "Revenue:", revenue);
     }
 
+    // Order Product
     public static void orderProduct(int userCode, int userAmount, Product[] inv){
 
         int amount = inv[userCode].getCount();
@@ -44,7 +53,8 @@ public class HW5{
         System.out.printf(COL_LABEL + COL_VALUE + "\n", "Cost:", value);
 
     }
-    
+
+    // List Inventory
     public static void listInventory(Product[] inv){
 
         System.out.printf(COL_LABEL + COL_LABEL + COL_LABEL + COL_LABEL + "\n",
@@ -57,12 +67,15 @@ public class HW5{
         
     }
 
+    // ----------------------------------------------------------------------------------------------------------------
+    // Main
     public static void main(String[] args){
 
         // Variables
+        PrintWriter fileOut = null;
         Scanner fileIn = null;
         Scanner keyboard = new Scanner(System.in);
-        Product[] inv = new Product[11];
+        Product[] inv = new Product[10];
         String tempLine;
         String input;
         int maxInv;
@@ -75,7 +88,7 @@ public class HW5{
         try
         {
             // Assign external file to file handle
-            fileIn = new Scanner(new FileInputStream(FILE_NAME));
+            fileIn = new Scanner(new FileInputStream(FILE_IN));
             tempLine = fileIn.nextLine();
 
             for(int i = 0; i < 10; i++){
@@ -91,7 +104,7 @@ public class HW5{
         // Handle file error
         catch (FileNotFoundException e)
         {
-            System.out.println("Error: file '" + FILE_NAME+
+            System.out.println("Error: file '" + FILE_IN+
                     "' not found.");
             System.out.println("Default folder: " +
                     System.getProperty("user.dir"));
@@ -184,8 +197,35 @@ public class HW5{
         }
         // End of menu
 
+        fileIn.close();
         System.out.println("Now exiting the program.");
 
+        // Outputting data to new file
+        // Attempt to open input file
+        try
+        {
+            // Assign external file to file handle
+            fileOut = new PrintWriter(new FileOutputStream(FILE_OUT));
+            for (int i = 0; i < 10; i++){
+                fileOut.printf(CODE_OUT + NAME_OUT + COST_OUT + AMOUNT_OUT + "%n",
+                        inv[i].getCode(), inv[i].getName(), inv[i].getCost(), inv[i].getCount());
+            }
+            fileOut.close();
+        }
+        // Handle file error
+        catch (FileNotFoundException e)
+        {
+            System.out.println("Error: file '" + FILE_OUT+
+                    "' not found.");
+            System.out.println("Default folder: " +
+                    System.getProperty("user.dir"));
+            System.out.println("Error message:" + e.getMessage());
+        }
+
+        keyboard.close();
+
     }
+    // End of Main
+    // ----------------------------------------------------------------------------------------------------------------
 
 }
