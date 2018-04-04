@@ -28,6 +28,23 @@ public class HW5{
         System.out.printf(COL_SALE_LABEL + COL_SALE_REV + "\n", "Revenue:", revenue);
     }
 
+    public static void orderProduct(int userCode, int userAmount, Product[] inv){
+
+        int amount = inv[userCode].getCount();
+        double value = inv[userCode].getCost() * userAmount;
+
+        // Changing values of Product
+        Product.setInventoryCount(userAmount);
+        Product.setInventoryValue(value);
+        inv[userCode].setCount(amount + userAmount);
+
+        // Printing cost and changes
+        System.out.printf(COL_SALE_LABEL + COL_SALE_AMOUNT + "\n", "Code:", userCode);
+        System.out.printf(COL_SALE_LABEL + COL_SALE_AMOUNT + "\n", "Amount:", userAmount);
+        System.out.printf(COL_SALE_LABEL + COL_SALE_REV + "\n", "Cost:", value);
+
+    }
+
     public static void main(String[] args){
 
         // Variables
@@ -114,8 +131,7 @@ public class HW5{
                     }
                     else{
                         maxInv = inv[userCode-80].getCount();
-                        System.out.println("Amount of item: " + maxInv);
-                        System.out.println("Enter an amount to sell");
+                        System.out.println("Enter an amount to sell.");
                         input = keyboard.next();
                         userAmount = Integer.parseInt(input);
                         if (userAmount > maxInv || userAmount <= 0){
@@ -125,8 +141,27 @@ public class HW5{
                         else
                             sellProduct(userCode - 80, userAmount, inv);
                     }
-
-
+                    break;
+                case 2:
+                    System.out.println("Enter the code of the object you would like to order.");
+                    input = keyboard.next();
+                    userCode = Integer.parseInt(input);
+                    if (userCode < 80 || userCode > 89) {
+                        System.out.println("Not a valid product code.");
+                        break;
+                    }
+                    else {
+                        System.out.println("Enter an amount to order.");
+                        input = keyboard.next();
+                        userAmount = Integer.parseInt(input);
+                        if (userAmount <= 0) {
+                            System.out.println("Not a valid amount of the object to be ordered.");
+                            break;
+                        } else
+                            orderProduct(userCode - 80, userAmount, inv);
+                    }
+                    break;
+                case 3:
 
             }
             // End of switch statement
