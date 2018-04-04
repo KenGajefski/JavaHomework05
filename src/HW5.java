@@ -1,12 +1,17 @@
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class HW5{
 
     // Constants and Globals
     private static final String FILE_NAME = "ProductInventoryIn.txt";
+
+    public static void sellProduct(){
+
+    }
 
     public static void main(String[] args){
 
@@ -15,7 +20,9 @@ public class HW5{
         Scanner keyboard = new Scanner(System.in);
         Product[] inv = new Product[11];
         String tempLine;
-        int input;
+        String input;
+        int menu = 0;
+        boolean terminate = false;
 
         // Attempt to open input file
         try
@@ -45,30 +52,47 @@ public class HW5{
             System.out.println("Error message:" + e.getMessage());
         }
 
-        // Menu
-        System.out.print("=============================\n" +
-                         "=== Camping Critters Menu ===\n" +
-                         "=== 1. Sell Product       ===\n" +
-                         "=== 2. Order Product      ===\n" +
-                         "=== 3. List Inventory     ===\n" +
-                         "=== 4. Exit               ===\n" +
-                         "=============================");
-        System.out.println();
-        System.out.println("Make you menu selection.");
-        input = keyboard.nextInt();
-        do{
-            // Any other option not on the menu
-            if (input > 4 || input < 1) {
-                System.out.println("That is not a valid menu option.");
-                input = keyboard.nextInt();
+
+        while(menu != 4) {
+
+            // Menu
+            System.out.print("=============================\n" +
+                    "=== Camping Critters Menu ===\n" +
+                    "=== 1. Sell Product       ===\n" +
+                    "=== 2. Order Product      ===\n" +
+                    "=== 3. List Inventory     ===\n" +
+                    "=== 4. Exit               ===\n" +
+                    "=============================");
+            System.out.println();
+            System.out.println("Make you menu selection.");
+            input = keyboard.next();
+
+            // Input validation
+            while (!terminate) {
+                try {
+                    if(Integer.parseInt(input) < 1 || Integer.parseInt(input) > 4) {
+                        System.out.println("That is not a valid input for the menu. Please enter another option.");
+                        input = keyboard.next();
+                    }
+                    else{
+                        menu = Integer.parseInt(input);
+                        terminate = true;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("That is not a valid input for the menu. Please enter another option.");
+                    input = keyboard.next();
+                }
             }
-            else {
-                System.out.println("Valid choice.");
-                input = keyboard.nextInt();
-            }
-        } while (!(input == 4));
+            // End of validation loop
+
+            // Menu option functions
+
+            // Resets the flag for validation loop
+            terminate = false;
+        }
+
         System.out.println("Now exiting the program.");
-        // End of menu
+
     }
 
 }
