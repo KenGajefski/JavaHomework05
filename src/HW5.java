@@ -1,7 +1,5 @@
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class HW5{
@@ -14,6 +12,17 @@ public class HW5{
         *  Change inventoryCount, inventoryValue, and count for product sold
         *  Print product sold message that includes: code, amount, revenue
         * */
+
+        double revenue;
+
+        revenue = inv[userCode].getCost() * userAmount;
+
+        System.out.println(Product.getInventoryValue());
+
+        Product.setInventoryCount(-userAmount);
+        Product.setInventoryValue(-revenue);
+
+        System.out.println(Product.getInventoryValue());
     }
 
     public static void main(String[] args){
@@ -39,11 +48,10 @@ public class HW5{
 
             for(int i = 0; i < 10; i++){
                 // Create object in array and set all values
-                inv[i] = new Product();
-                inv[i].setCode(Integer.parseInt(tempLine.substring(0,6).trim()));
-                inv[i].setName(tempLine.substring(7,31).trim());
-                inv[i].setCost(Double.parseDouble(tempLine.substring(31,41).trim()));
-                inv[i].setCount(Integer.parseInt(tempLine.substring(42,51).trim()));
+                inv[i] = new Product((Integer.parseInt(tempLine.substring(0,6).trim())),
+                        tempLine.substring(7,31).trim(),
+                        Double.parseDouble(tempLine.substring(31,41).trim()),
+                        Integer.parseInt(tempLine.substring(42,51).trim()));
                 if (i != 9)
                     tempLine = fileIn.nextLine();
             }

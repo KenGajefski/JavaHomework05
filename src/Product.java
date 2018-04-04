@@ -55,15 +55,15 @@ public class Product {
     }
 
     public static void setProductCount(int productCount) {
-        Product.productCount = productCount;
+        Product.productCount += productCount;
     }
 
     public static void setInventoryValue(double inventoryValue) {
-        Product.inventoryValue = inventoryValue;
+        Product.inventoryValue += inventoryValue;
     }
 
     public static void setInventoryCount(int inventoryCount) {
-        Product.inventoryCount = inventoryCount;
+        Product.inventoryCount += inventoryCount;
     }
 
     public void setCount(int count) {
