@@ -9,8 +9,11 @@ public class HW5{
     // Constants and Globals
     private static final String FILE_NAME = "ProductInventoryIn.txt";
 
-    public static void sellProduct(){
-
+    public static void sellProduct(int userCode, int userAmount, Product[] inv){
+        /* TODO
+        *  Change inventoryCount, inventoryValue, and count for product sold
+        *  Print product sold message that includes: code, amount, revenue
+        * */
     }
 
     public static void main(String[] args){
@@ -21,7 +24,10 @@ public class HW5{
         Product[] inv = new Product[11];
         String tempLine;
         String input;
-        int menu = 0;
+        int maxInv;
+        int userMenuChoice = 0;
+        int userAmount = 0;
+        int userCode;
         boolean terminate = false;
 
         // Attempt to open input file
@@ -53,7 +59,7 @@ public class HW5{
         }
 
 
-        while(menu != 4) {
+        while(userMenuChoice != 4) {
 
             // Menu
             System.out.print("=============================\n" +
@@ -75,7 +81,7 @@ public class HW5{
                         input = keyboard.next();
                     }
                     else{
-                        menu = Integer.parseInt(input);
+                        userMenuChoice = Integer.parseInt(input);
                         terminate = true;
                     }
                 } catch (NumberFormatException e) {
@@ -86,10 +92,37 @@ public class HW5{
             // End of validation loop
 
             // Menu option functions
+            switch (userMenuChoice){
+                case 1:
+                    System.out.println("Enter the code of the object you would like to sell.");
+                    input = keyboard.next();
+                    userCode = Integer.parseInt(input);
+                    if (userCode < 80 || userCode > 89) {
+                        System.out.println("Not a valid product code.");
+                        break;
+                    }
+                    else{
+                        maxInv = inv[userCode-80].getCount();
+                        System.out.println("Enter an amount to sell");
+                        input = keyboard.next();
+                        userAmount = Integer.parseInt(input);
+                        if (userAmount > maxInv || userAmount <= 0){
+                            System.out.println("Not a valid amount of the object to be sold.");
+                            break;
+                        }
+                        else
+                            sellProduct(userCode - 80, userAmount, inv);
+                    }
+
+
+
+            }
+            // End of switch statement
 
             // Resets the flag for validation loop
             terminate = false;
         }
+        // End of menu
 
         System.out.println("Now exiting the program.");
 
