@@ -16,7 +16,6 @@ public class HW5{
         Product[] inv = new Product[11];
         String tempLine;
         int input;
-        int i = 0;
 
         // Attempt to open input file
         try
@@ -25,15 +24,15 @@ public class HW5{
             fileIn = new Scanner(new FileInputStream(FILE_NAME));
             tempLine = fileIn.nextLine();
 
-            while (fileIn.hasNext()){
-                System.out.println(tempLine);
+            for(int i = 0; i < 10; i++){
+                // Create object in array and set all values
                 inv[i] = new Product();
                 inv[i].setCode(Integer.parseInt(tempLine.substring(0,6).trim()));
                 inv[i].setName(tempLine.substring(7,31).trim());
                 inv[i].setCost(Double.parseDouble(tempLine.substring(31,41).trim()));
                 inv[i].setCount(Integer.parseInt(tempLine.substring(42,51).trim()));
-                i++;
-                tempLine = fileIn.nextLine();
+                if (i != 9)
+                    tempLine = fileIn.nextLine();
             }
         }
         // Handle file error
@@ -45,8 +44,6 @@ public class HW5{
                     System.getProperty("user.dir"));
             System.out.println("Error message:" + e.getMessage());
         }
-
-        System.out.println(inv[6].getCode() + inv[6].getName() + inv[6].getCost() + inv[6].getCount());
 
         // Menu
         System.out.print("=============================\n" +
@@ -61,7 +58,7 @@ public class HW5{
         input = keyboard.nextInt();
         do{
             // Any other option not on the menu
-            if (input > 4 || input < 0) {
+            if (input > 4 || input < 1) {
                 System.out.println("That is not a valid menu option.");
                 input = keyboard.nextInt();
             }
